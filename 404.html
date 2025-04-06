@@ -1,19 +1,287 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>acrylic - 404</title>
+	<link rel="shortcut icon" href="img/2.ico" type="image/ico">
     <style>
-        .doesnt-exist-lbl {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        :root {
+            --primary: #C21807;
+            --primary-dark: #8A1105;
+            --primary-light: #FF2A15;
+            --bg: #0A0A0A;
+            --card-bg: rgba(30, 30, 30, 0.85);
+            --text-main: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(10vw, -5vh); }
+            50% { transform: translate(15vw, 0); }
+            75% { transform: translate(5vw, 8vh); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-8vw, 6vh); }
+            50% { transform: translate(-15vw, 0); }
+            75% { transform: translate(-5vw, -7vh); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(5vw, 10vh); }
+            50% { transform: translate(12vw, 5vh); }
+            75% { transform: translate(7vw, -3vh); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Карточка */
+        .error-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 600px;
+            width: 90%;
             text-align: center;
-            font-size: 50px;
+            border: 1px solid var(--border);
+            box-shadow: 
+                0 20px 50px rgba(194, 24, 7, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            animation: fadeIn 0.8s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .error-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 42, 42, 0.1) 0%, 
+                transparent 50%, 
+                rgba(255, 42, 42, 0.1) 100%
+            );
+            z-index: -1;
+        }
+
+        /* Типографика */
+        .error-code {
+            font-size: 100px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(194, 24, 7, 0.4);
+            letter-spacing: -5px;
+        }
+
+        .error-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .error-description {
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Кнопка */
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(194, 24, 7, 0.4);
+            z-index: 1;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(194, 24, 7, 0.6);
+        }
+
+        .home-btn:active {
+            transform: translateY(1px);
+        }
+
+        .home-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: all 0.7s;
+            z-index: -1;
+        }
+
+        .home-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Анимированные шары */
+        .floating-ball {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: 1;
+            will-change: transform;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .error-card {
+                padding: 40px 24px;
+            }
+            
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 28px;
+            }
+            
+            .error-description {
+                font-size: 16px;
+            }
+            
+            .home-btn {
+                padding: 14px 32px;
+                font-size: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-ball {
+                animation: none !important;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div class="doesnt-exist-lbl">Идиот! Такой страницы не существует.</div>
-</body>
+    <!-- Анимированные шары -->
+    <div id="floatingBalls"></div>
+    
+    <!-- Основная карточка -->
+    <div class="error-card">
+        <div class="error-code">404</div>
+        <h1 class="error-title">СТРАНИЦА НЕ НАЙДЕНА</h1>
+        <p class="error-description">
+            Возможно, вы ошиблись в адресе или страница была перемещена.
+            Попробуйте начать с главной страницы.
+        </p>
+        <button class="home-btn" onclick="window.location.href='/'">вернуться на главную</button>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('floatingBalls');
+            
+            const balls = [
+                { size: 300, color: 'var(--primary-light)', animation: 'float 25s infinite ease-in-out', top: '10%', left: '10%' },
+                { size: 450, color: 'var(--primary-dark)', animation: 'float2 30s infinite ease-in-out', bottom: '5%', right: '5%' },
+                { size: 250, color: 'var(--primary)', animation: 'float3 20s infinite ease-in-out', top: '60%', left: '70%' },
+                { size: 350, color: 'var(--primary-light)', animation: 'float2 35s infinite ease-in-out', top: '30%', right: '20%' },
+                { size: 200, color: 'var(--primary-dark)', animation: 'float 22s infinite ease-in-out', bottom: '15%', left: '30%' }
+            ];
+            
+            balls.forEach((ball, index) => {
+                const ballElement = document.createElement('div');
+                ballElement.className = 'floating-ball';
+                
+                ballElement.style.width = `${ball.size}px`;
+                ballElement.style.height = `${ball.size}px`;
+                ballElement.style.background = ball.color;
+                ballElement.style.animation = ball.animation;
+                ballElement.style.animationDelay = `${index * 2}s`;
+                
+                if (ball.top) ballElement.style.top = ball.top;
+                if (ball.left) ballElement.style.left = ball.left;
+                if (ball.bottom) ballElement.style.bottom = ball.bottom;
+                if (ball.right) ballElement.style.right = ball.right;
+                
+                // Добавляем небольшую задержку между шарами
+                setTimeout(() => {
+                    container.appendChild(ballElement);
+                }, index * 200);
+            });
+            
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    document.querySelectorAll('.floating-ball').forEach(ball => {
+                        ball.style.animationPlayState = 'paused';
+                        setTimeout(() => {
+                            ball.style.animationPlayState = 'running';
+                        }, 50);
+                    });
+                }, 200);
+            });
+        });
+    </script>
+    <script src="js/window.js"></script>
+</body>
 </html>
