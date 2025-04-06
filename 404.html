@@ -4,8 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>acrylic - 404</title>
-	<link rel="shortcut icon" href="img/2.ico" type="image/ico">
+    <link rel="shortcut icon" href="img/2.ico" type="image/x-icon">
     <style>
+        /* прелоадер */
+        .preloader {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            position: fixed;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 9999;
+            transition: all 1s ease;
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .preloader-circle {
+            align-self: center;
+            width: 60px;
+            height: 60px;
+            border: 6px solid transparent;
+            border-top: 6px solid #f5323c;
+            border-radius: 100%;
+            animation: preloader 500ms linear infinite;
+        }
+        
+        @keyframes preloader {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.6);
+        }
+
+        /* основные стили */
         :root {
             --primary: #C21807;
             --primary-dark: #8A1105;
@@ -17,51 +57,42 @@
             --border: rgba(255, 255, 255, 0.08);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(10vw, -5vh); }
-            50% { transform: translate(15vw, 0); }
-            75% { transform: translate(5vw, 8vh); }
-        }
-
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-8vw, 6vh); }
-            50% { transform: translate(-15vw, 0); }
-            75% { transform: translate(-5vw, -7vh); }
-        }
-
-        @keyframes float3 {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(5vw, 10vh); }
-            50% { transform: translate(12vw, 5vh); }
-            75% { transform: translate(7vw, -3vh); }
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
+            font-family: "Helvetica", Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 400;
             background: var(--bg);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
         }
 
-        /* Карточка */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            flex: 0 0 auto;
+            position: relative;
+            margin: 0 auto;
+            max-width: 1280px;
+        }
+
+        /* контент 404 */
+        .error-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
         .error-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -72,10 +103,8 @@
             width: 90%;
             text-align: center;
             border: 1px solid var(--border);
-            box-shadow: 
-                0 20px 50px rgba(194, 24, 7, 0.3),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            animation: fadeIn 0.8s ease-out forwards;
+            box-shadow: 0 20px 50px rgba(194, 24, 7, 0.3),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
             z-index: 10;
@@ -88,16 +117,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(
-                135deg, 
-                rgba(255, 42, 42, 0.1) 0%, 
-                transparent 50%, 
-                rgba(255, 42, 42, 0.1) 100%
-            );
+            background: linear-gradient(135deg, 
+                          rgba(255, 42, 42, 0.1) 0%, 
+                          transparent 50%, 
+                          rgba(255, 42, 42, 0.1) 100%);
             z-index: -1;
         }
 
-        /* Типографика */
         .error-code {
             font-size: 100px;
             font-weight: 900;
@@ -128,7 +154,7 @@
             margin-right: auto;
         }
 
-        /* Кнопка */
+        /* кнопка */
         .home-btn {
             display: inline-flex;
             align-items: center;
@@ -164,12 +190,10 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
+            background: linear-gradient(90deg,
+                          transparent,
+                          rgba(255, 255, 255, 0.2),
+                          transparent);
             transition: all 0.7s;
             z-index: -1;
         }
@@ -178,7 +202,7 @@
             left: 100%;
         }
 
-        /* Анимированные шары */
+        /* анимированные шары */
         .floating-ball {
             position: fixed;
             border-radius: 50%;
@@ -188,57 +212,58 @@
             will-change: transform;
         }
 
-        /* Адаптивность */
+        /* адаптив */
         @media (max-width: 768px) {
             .error-card {
                 padding: 40px 24px;
             }
-            
             .error-code {
                 font-size: 80px;
             }
-            
             .error-title {
                 font-size: 28px;
             }
-            
             .error-description {
                 font-size: 16px;
             }
-            
             .home-btn {
                 padding: 14px 32px;
                 font-size: 15px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .floating-ball {
-                animation: none !important;
             }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Анимированные шары -->
+    <!-- прелоадер -->
+    <div class="preloader">
+        <div class="preloader-circle"></div>
+    </div>
+
+    <!-- шары -->
     <div id="floatingBalls"></div>
-    
-    <!-- Основная карточка -->
-    <div class="error-card">
-        <div class="error-code">404</div>
-        <h1 class="error-title">СТРАНИЦА НЕ НАЙДЕНА</h1>
-        <p class="error-description">
-            Возможно, вы ошиблись в адресе или страница была перемещена.
-            Попробуйте начать с главной страницы.
-        </p>
-        <button class="home-btn" onclick="window.location.href='/'">вернуться на главную</button>
+
+    <!-- основной контент -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="error-content">
+                <div class="error-card">
+                    <div class="error-code">404</div>
+                    <h1 class="error-title">СТРАНИЦА НЕ НАЙДЕНА</h1>
+                    <p class="error-description">
+                        Возможно, вы ошиблись в адресе или страница была перемещена.
+                        Попробуйте начать с главной страницы.
+                    </p>
+                    <button class="home-btn" onclick="window.location.href='/'">вернуться на главную</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // инициализация шаров
+        const initBalls = () => {
             const container = document.getElementById('floatingBalls');
-            
             const balls = [
                 { size: 300, color: 'var(--primary-light)', animation: 'float 25s infinite ease-in-out', top: '10%', left: '10%' },
                 { size: 450, color: 'var(--primary-dark)', animation: 'float2 30s infinite ease-in-out', bottom: '5%', right: '5%' },
@@ -246,42 +271,65 @@
                 { size: 350, color: 'var(--primary-light)', animation: 'float2 35s infinite ease-in-out', top: '30%', right: '20%' },
                 { size: 200, color: 'var(--primary-dark)', animation: 'float 22s infinite ease-in-out', bottom: '15%', left: '30%' }
             ];
-            
+
+            // анимации для шаров
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translate(0, 0); }
+                    25% { transform: translate(10vw, -5vh); }
+                    50% { transform: translate(15vw, 0); }
+                    75% { transform: translate(5vw, 8vh); }
+                }
+                @keyframes float2 {
+                    0%, 100% { transform: translate(0, 0); }
+                    25% { transform: translate(-8vw, 6vh); }
+                    50% { transform: translate(-15vw, 0); }
+                    75% { transform: translate(-5vw, -7vh); }
+                }
+                @keyframes float3 {
+                    0%, 100% { transform: translate(0, 0); }
+                    25% { transform: translate(5vw, 10vh); }
+                    50% { transform: translate(12vw, 5vh); }
+                    75% { transform: translate(7vw, -3vh); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // создание шаров
             balls.forEach((ball, index) => {
                 const ballElement = document.createElement('div');
                 ballElement.className = 'floating-ball';
-                
                 ballElement.style.width = `${ball.size}px`;
                 ballElement.style.height = `${ball.size}px`;
                 ballElement.style.background = ball.color;
                 ballElement.style.animation = ball.animation;
-                ballElement.style.animationDelay = `${index * 2}s`;
-                
                 if (ball.top) ballElement.style.top = ball.top;
                 if (ball.left) ballElement.style.left = ball.left;
                 if (ball.bottom) ballElement.style.bottom = ball.bottom;
                 if (ball.right) ballElement.style.right = ball.right;
-                
-                // Добавляем небольшую задержку между шарами
-                setTimeout(() => {
-                    container.appendChild(ballElement);
-                }, index * 200);
+                setTimeout(() => container.appendChild(ballElement), index * 200);
             });
+        };
+
+        // обработка загрузки
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.querySelector('.preloader');
+            const errorContent = document.querySelector('.error-content');
             
-            let resizeTimeout;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    document.querySelectorAll('.floating-ball').forEach(ball => {
-                        ball.style.animationPlayState = 'paused';
-                        setTimeout(() => {
-                            ball.style.animationPlayState = 'running';
-                        }, 50);
-                    });
-                }, 200);
-            });
+            initBalls();
+            
+            setTimeout(() => {
+                preloader.classList.add('loaded');
+                setTimeout(() => errorContent.style.opacity = '1', 500);
+            }, 1000);
         });
     </script>
-    <script src="js/window.js"></script>
+      <script src="js/block.js"></script>
+      <script src="js/window.js"></script>
+        <script src="js/vue.js"></script>
+      <script src="js/config.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/index.js"></script>
 </body>
 </html>
