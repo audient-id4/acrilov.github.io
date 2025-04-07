@@ -30,7 +30,7 @@
             width: 60px;
             height: 60px;
             border: 6px solid transparent;
-            border-top: 6px solid #f5323c;
+            border-top: 6px solid #9789ff;
             border-radius: 100%;
             animation: preloader 500ms linear infinite;
         }
@@ -47,9 +47,9 @@
 
         /* основные стили */
         :root {
-            --primary: #C21807;
-            --primary-dark: #8A1105;
-            --primary-light: #FF2A15;
+            --primary: #9789ff;
+            --primary-dark: #6a5acd;
+            --primary-light: #b8adff;
             --bg: #0A0A0A;
             --card-bg: rgba(30, 30, 30, 0.85);
             --text-main: #FFFFFF;
@@ -60,13 +60,14 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: "Helvetica", Helvetica, Arial, sans-serif;
+            font-family: "Inter", Helvetica, Arial, sans-serif;
             font-size: 18px;
             font-weight: 400;
             background: var(--bg);
             color: var(--text-main);
             min-height: 100vh;
             overflow: hidden;
+            perspective: 1000px;
         }
 
         .wrapper {
@@ -103,11 +104,14 @@
             width: 90%;
             text-align: center;
             border: 1px solid var(--border);
-            box-shadow: 0 20px 50px rgba(194, 24, 7, 0.3),
+            box-shadow: 0 20px 50px rgba(151, 137, 255, 0.3),
                         inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
             z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            will-change: transform;
         }
 
         .error-card::before {
@@ -118,9 +122,22 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, 
-                          rgba(255, 42, 42, 0.1) 0%, 
+                          rgba(151, 137, 255, 0.1) 0%, 
                           transparent 50%, 
-                          rgba(255, 42, 42, 0.1) 100%);
+                          rgba(151, 137, 255, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .error-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            border: 1px solid rgba(151, 137, 255, 0.2);
+            pointer-events: none;
             z-index: -1;
         }
 
@@ -133,8 +150,9 @@
             color: transparent;
             line-height: 1;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(194, 24, 7, 0.4);
+            text-shadow: 0 0 30px rgba(151, 137, 255, 0.4);
             letter-spacing: -5px;
+            transition: transform 0.3s ease;
         }
 
         .error-title {
@@ -142,6 +160,7 @@
             font-weight: 700;
             margin-bottom: 16px;
             line-height: 1.3;
+            transition: transform 0.3s ease;
         }
 
         .error-description {
@@ -152,6 +171,7 @@
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+            transition: transform 0.3s ease;
         }
 
         /* кнопка */
@@ -170,17 +190,19 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(194, 24, 7, 0.4);
+            box-shadow: 0 5px 20px rgba(151, 137, 255, 0.4);
             z-index: 1;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
         }
 
         .home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(194, 24, 7, 0.6);
+            transform: translateY(-3px) translateZ(10px);
+            box-shadow: 0 8px 30px rgba(151, 137, 255, 0.6);
         }
 
         .home-btn:active {
-            transform: translateY(1px);
+            transform: translateY(1px) translateZ(5px);
         }
 
         .home-btn::before {
@@ -210,6 +232,41 @@
             opacity: 0.2;
             z-index: 1;
             will-change: transform;
+        }
+
+        /* частицы */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
         }
 
         /* адаптив */
@@ -243,11 +300,14 @@
     <!-- шары -->
     <div id="floatingBalls"></div>
 
+    <!-- частицы -->
+    <div class="particles" id="particles"></div>
+
     <!-- основной контент -->
     <div class="wrapper">
         <div class="container">
             <div class="error-content">
-                <div class="error-card">
+                <div class="error-card" id="errorCard">
                     <div class="error-code">404</div>
                     <h1 class="error-title">СТРАНИЦА НЕ НАЙДЕНА</h1>
                     <p class="error-description">
@@ -312,12 +372,87 @@
             });
         };
 
+        // создание частиц
+        const createParticles = () => {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // случайные начальные позиции
+                const posX = Math.random() * 100;
+                const posY = 100 + Math.random() * 20;
+                const delay = Math.random() * 15;
+                const duration = 20 + Math.random() * 20;
+                const size = 1 + Math.random() * 2;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        };
+
+        // 3D эффект наклона карточки
+        const initTiltEffect = () => {
+            const card = document.getElementById('errorCard');
+            const cardContent = card;
+            
+            card.addEventListener('mousemove', (e) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardWidth = cardRect.width;
+                const cardHeight = cardRect.height;
+                const centerX = cardRect.left + cardWidth / 2;
+                const centerY = cardRect.top + cardHeight / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                
+                // ограничиваем угол наклона
+                const rotateX = (mouseY / cardHeight * 10).toFixed(2);
+                const rotateY = -(mouseX / cardWidth * 10).toFixed(2);
+                
+                // применяем трансформацию
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                card.style.boxShadow = `0 30px 60px rgba(151, 137, 255, 0.4)`;
+                
+                // параллакс эффект для элементов внутри
+                const code = card.querySelector('.error-code');
+                const title = card.querySelector('.error-title');
+                const desc = card.querySelector('.error-description');
+                
+                if (code) code.style.transform = `translateZ(20px)`;
+                if (title) title.style.transform = `translateZ(15px)`;
+                if (desc) desc.style.transform = `translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                card.style.boxShadow = '0 20px 50px rgba(151, 137, 255, 0.3)';
+                
+                const code = card.querySelector('.error-code');
+                const title = card.querySelector('.error-title');
+                const desc = card.querySelector('.error-description');
+                
+                if (code) code.style.transform = 'translateZ(0)';
+                if (title) title.style.transform = 'translateZ(0)';
+                if (desc) desc.style.transform = 'translateZ(0)';
+            });
+        };
+
         // обработка загрузки
         document.addEventListener('DOMContentLoaded', () => {
             const preloader = document.querySelector('.preloader');
             const errorContent = document.querySelector('.error-content');
             
             initBalls();
+            createParticles();
+            initTiltEffect();
             
             setTimeout(() => {
                 preloader.classList.add('loaded');
@@ -325,11 +460,11 @@
             }, 1000);
         });
     </script>
-      <script src="js/block.js"></script>
-      <script src="js/window.js"></script>
-        <script src="js/vue.js"></script>
-      <script src="js/config.js"></script>
-        <script src="js/common.js"></script>
-        <script src="js/index.js"></script>
+    <script src="js/block.js"></script>
+    <script src="js/window.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
