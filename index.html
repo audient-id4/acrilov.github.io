@@ -17,11 +17,11 @@
     <div id="asif-page">
       <div class="wrapper">
         <div class="background">
-          <video preload muted ref="background-video" id="background-video">
-            <source src="videos/Righthere.mp4" type="video/mp4" />
+          <video preload muted ref="background-video" id="background-video" onloadeddata="this.volume=0.3">
+            <source src="videos/Righthere.mp4" type="video/mp4"/>
             <source src="videos/Righthere2.mp4" type="video/mp4" />
             <source src="videos/Righthere3.mp4" type="video/mp4" />
-          </video>
+          </video>          
         </div>
         <div class="asif-page-copyright" :style="CopyRightStyle">
           {{ copyrightText }}

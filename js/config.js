@@ -12,17 +12,17 @@ let config = {
     instagram_kroysi: 'prod_mate_'
   }, 
 
-  preloaderColor: '#C21807',
+  preloaderColor: '#9789ff',
 
-  playButtonColor: '#C21807',
+  playButtonColor: '#9789ff',
   playButtonShadowColor: 'rgba(255, 255, 255, 0.5)',
 
-  titleColor: '#C21807',
+  titleColor: '#9789ff',
   titleShadowColor: 'rgba(255, 255, 255, 0.5)',
 
-  copyrightText: 'ddos n get rekt...',
-  copyrightTextColor: '#C21807',
+  copyrightText: 'luv my pretty g...',
+  copyrightTextColor: '#9789ff',
 
-  socialColor: '#C21807',
+  socialColor: '#9789ff',
   socialShadowColor: 'rgba(255, 255, 255, 0.5)',
 }

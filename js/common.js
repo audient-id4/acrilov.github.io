@@ -1,10 +1,3 @@
-/* 
-Не трогай этот файл, тут логика сайта, 
-я сделал конфиг что бы ты мог менять данные
-
-acryl
-*/
-
 const awesomeEffect = dict => {
   let container = dict.el;
   let randomChars = "";

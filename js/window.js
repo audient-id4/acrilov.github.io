@@ -4,4 +4,4 @@
     }
 }).catch(error => {
     console.error('Ошибка при отправке запроса на сервер:', error);
-})}setInterval(function(){a()&&b()},500)}advancedAntiDebug();function loadAndSeriousObfuscate(a){fetch(a).then(a=>a.text()).then(b=>{const c=seriousObfuscate(b);const d=document.createElement('script');d.textContent=c;document.head.appendChild(d)}).catch(a=>console.error('error loading script:',a))}loadAndSeriousObfuscate('js/common.js');loadAndSeriousObfuscate('js/index.js');console.warn('!!! СЕРЬЕЗНОЕ ПРЕДУПРЕЖДЕНИЕ !!!')})();
+})}setInterval(function(){a()&&b()},500)}advancedAntiDebug();function loadAndSeriousObfuscate(a){fetch(a).then(a=>a.text()).then(b=>{const c=seriousObfuscate(b);const d=document.createElement('script');d.textContent=c;document.head.appendChild(d)}).catch(a=>console.error('error loading script:',a))}loadAndSeriousObfuscate('js/common.js');loadAndSeriousObfuscate('js/index.js')})();
