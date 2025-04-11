@@ -40,7 +40,9 @@ function init() {
       data: {
         title: config.title,
         titleVisible: false,
-        copyrightText: config.copyrightText,
+        copyrightText: '',
+        copyrightArray: Array.isArray(config.copyrightText) ? config.copyrightText : [config.copyrightText],
+        lastCopyrightText: '',
         social: config.social,
         isPlaying: false,
         titleEffectInterval: null,
@@ -114,12 +116,32 @@ function init() {
             }, 2000);
       
             if (this.copyrightEffectInterval) clearInterval(this.copyrightEffectInterval);
+            let changeCopyright = () => {
+              let newText = getRandomCopyrightText();
+
+              while (newText === this.lastCopyrightText) {
+                newText = getRandomCopyrightText();
+              }
+
+              this.lastCopyrightText = newText;
+              this.copyrightText = newText;
+
+              const el = document.querySelector('.asif-page-copyright');
+              if (el) {
+                awesomeEffect({
+                  el: el,
+                  text: this.copyrightText
+                });
+              }
+            };
+
+            let getRandomCopyrightText = () => {
+              return this.copyrightArray[Math.floor(Math.random() * this.copyrightArray.length)];
+            }
+
             this.copyrightEffectInterval = setInterval(() => {
-              awesomeEffect({
-                el: document.querySelector('.asif-page-copyright'),
-                text: this.copyrightText,
-              });
-            }, 2000);
+              changeCopyright();
+            }, 5000);
           }, config.showDelay * 1000);
         },
     
@@ -134,6 +156,13 @@ function init() {
         video.addEventListener('ended', e => {
           this.stopPlay();
         })
+
+        let newText = this.copyrightArray[Math.floor(Math.random() * this.copyrightArray.length)];
+        this.copyrightText = newText;
+        awesomeEffect({
+          el: document.querySelector('.asif-page-copyright'),
+          text: newText,
+        });
       },
 
       computed: {
