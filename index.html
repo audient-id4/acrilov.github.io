@@ -1,77 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF+2" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>acrylic</title> 
-	<meta name="description" content="acrylic bio - designer, producer">
+    <title id="dynamicTitle">mate producer</title>
+    <meta name="description" content="acrylic bio - designer, producer">
     <link rel="stylesheet" href="css/main.css" />
-	<link rel="shortcut icon" href="img/2.ico" type="image/ico">
-  </head>
-  <body>
+    <link rel="shortcut icon" href="img/ecstasy-addiction-tablets.svg" type="image/ico">
+    <script>
+        const phrases = ["mate producer", "acrylic designer"];
+        const transitionChars = "~!@#$%^&*()_+-=[]{};:,.<>?/|\\";
+        let currentIndex = 0;
+        let lastUpdate = Date.now();
+        let animFrame;
+        const showTime = 3000;
+        const transitionTime = 1000;
+
+        function getRandomChar() {
+            return transitionChars[Math.floor(Math.random() * transitionChars.length)];
+        }
+
+        function transformText(baseText, targetText, progress) {
+            let result = "";
+            const maxLength = Math.max(baseText.length, targetText.length);
+            
+            for (let i = 0; i < maxLength; i++) {
+                if (Math.random() < progress) {
+                    result += i < targetText.length ? targetText[i] : "";
+                } else if (Math.random() < 0.4) {
+                    result += getRandomChar();
+                } else {
+                  result += i < baseText.length ? baseText[i] : "";
+                }
+            }
+            
+            return result || " ";
+        }
+
+        function updateTitle() {
+            const now = Date.now();
+            const elapsed = now - lastUpdate;
+            
+            if (elapsed < showTime) {
+                document.title = phrases[currentIndex];
+            } 
+            else if (elapsed < showTime + transitionTime) {
+                const nextIndex = (currentIndex + 1) % phrases.length;
+                 const progress = (elapsed - showTime) / transitionTime;
+               document.title = transformText(phrases[currentIndex], phrases[nextIndex], progress);
+            } 
+            else {
+                currentIndex = (currentIndex + 1) % phrases.length;
+                lastUpdate = now; 
+            }
+            
+            animFrame = setTimeout(updateTitle, 50);
+        }
+
+        window.addEventListener('load', () => {
+            updateTitle();
+        });
+    </script>
+</head>
+<body>
     <div class="preloader">
-      <div style="PreloaderStyle" class="preloader-circle"></div>
+        <div style="PreloaderStyle" class="preloader-circle"></div>
     </div>
 
     <div id="asif-page">
-      <div class="wrapper">
-        <div class="background">
-          <video preload muted ref="background-video" id="background-video" onloadeddata="this.volume=0.3">
-            <source src="videos/Righthere.mp4" type="video/mp4"/>
-            <source src="videos/Righthere2.mp4" type="video/mp4" />
-            <source src="videos/Righthere3.mp4" type="video/mp4" />
-          </video>          
-        </div>
-        <div class="asif-page-copyright" :style="CopyRightStyle">
-          {{ copyrightText }}
-        </div>
-        <div class="container">       
-          <div class="asif-page-wrapper">
-            <div class="asif-page-info">
-              <div
-                class="asif-page-info-play"
-                :class=" { 'is-playing': isPlaying }"
-                :style="PlayButtonStyle"
-                @click="startPlay"
-              >
-                Start
-              </div>
-              <div class="asif-page-info-logo"></div>
-              <div
-                ref="title"
-                :class="{ 'title-visible': titleVisible }"
-                class="asif-page-info-title"
-                :style="TitleStyle"
-              >
-                {{ title }}
-              </div>
-              <div
-                class="asif-page-info-social"
-                :class="{ 'social-visible': titleVisible }"
-              >
-                <a
-                  v-for="(item, key) in social"
-                  :href="getSocialLink(key, item)"
-                  target="_blank"
-                  class="asif-page-info-social-item"
-                >
-                  <span :style="SocialStyle" :class="'icon-' + key"></span>
-                </a>
-              </div>
+        <div class="wrapper">
+            <div class="background">
+                <video preload muted ref="background-video" id="background-video" onloadeddata="this.volume=0.3">
+                    <source src="videos/Righthere.mp4" type="video/mp4"/>
+                    <source src="videos/Righthere2.mp4" type="video/mp4" />
+                    <source src="videos/Righthere3.mp4" type="video/mp4" />
+                </video>          
             </div>
-          </div>
+            <div class="asif-page-copyright" :style="CopyRightStyle">
+                {{ copyrightText }}
+            </div>
+            <div class="container">       
+                <div class="asif-page-wrapper">
+                    <div class="asif-page-info">
+                        <div
+                            class="asif-page-info-play"
+                            :class=" { 'is-playing': isPlaying }"
+                            :style="PlayButtonStyle"
+                            @click="startPlay"
+                        >
+                            Start
+                        </div>
+                        <div class="asif-page-info-logo"></div>
+                        <div
+                            ref="title"
+                            :class="{ 'title-visible': titleVisible }"
+                            class="asif-page-info-title"
+                            :style="TitleStyle"
+                        >
+                            {{ title }}
+                        </div>
+                        <div
+                            class="asif-page-info-social"
+                            :class="{ 'social-visible': titleVisible }"
+                        >
+                            <a
+                                v-for="(item, key) in social"
+                                :href="getSocialLink(key, item)"
+                                target="_blank"
+                                class="asif-page-info-social-item"
+                            >
+                                <span :style="SocialStyle" :class="'icon-' + key"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-<!-- <script>
-document.oncontextmenu = function (e) { e.preventDefault(); return false; }
-</script> -->
-  <script src="js/block.js"></script>
-  <script src="js/window.js"></script>
-	<script src="js/vue.js"></script>
-  <script src="js/config.js"></script>
-	<script src="js/common.js"></script>
-	<script src="js/index.js"></script>
-  </body>
+
+    <script src="js/block.js"></script>
+    <script src="js/window.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+</body>
 </html>
