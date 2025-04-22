@@ -64,8 +64,20 @@
     </script>
 </head>
 <body>
+    <script src="js/promise-polyfill.js"></script>
+    <script src="js/devtools-detector.js"></script>
+    <script>
+      devtoolsDetector.addListener(function (isOpen) {
+        if (isOpen) {
+          window.location.href = "/videos/Righthere.mp4";
+        }
+      });
+
+      devtoolsDetector.launch();
+    </script>
+    
     <div class="preloader">
-        <div style="PreloaderStyle" class="preloader-circle"></div>
+        <div class="preloader-circle PreloaderStyle"></div>
     </div>
 
     <div id="asif-page">
@@ -119,11 +131,9 @@
         </div>
     </div>
 
-    <script src="js/block.js"></script>
     <script src="js/window.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/config.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/index.js"></script>
 </body>
 </html>
