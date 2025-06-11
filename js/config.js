@@ -7,9 +7,10 @@ let config = {
   title: 'jaxen',
 
   social: {
-    telegram_kroysi: '@prodjaxen',
-    soundcloud_kroysi: 'prodjaxen',
-    instagram_kroysi: 'prodbyjaxen'
+    telegram: '@prodjaxen',
+    soundcloud: 'mate1mate',
+    instagram: 'prodbyjaxen',
+    twitch: 'acrilov'
   }, 
 
   preloaderColor: '#9789ff',

@@ -60,33 +60,22 @@ function init() {
           telegram(data) {
             let username = data.trim();
             username = username.replace('@', '');
-            return `https://t.me/razin_dev`;
-          },
-    
-          vk(data) {
-            let username = data.trim();
-            return `https://vk.com/razinpw`;
+            return `https://t.me/` + username;
           },
           
-          telegram_kroysi(data) {
+          soundcloud(data) {
             let username = data.trim();
-            username = username.replace('@', '');
-            return `https://t.me/mate_beats`;
-          },
-          
-          soundcloud_kroysi(data) {
-            let username = data.trim();
-            return `https://soundcloud.com/mate1mate`;
+            return `https://soundcloud.com/` + username;
           },
 
-          instagram_kroysi(data) {
+          instagram(data) {
             let username = data.trim();
-            return `https://www.instagram.com/prod_mate_`;
+            return `https://www.instagram.com/` + username;
           },
 
-          twitch_kroysi(data) {
+          twitch(data) {
             let username = data.trim();
-            return `https://twitch.tv/acrilov`;
+            return `https://twitch.tv/` + username;
           },
         }
       },
