@@ -4,64 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title id="dynamicTitle">mate producer</title>
-    <meta name="description" content="acrylic bio - designer, producer">
+    <title id="dynamicTitle">n-word.pw</title>
+    <meta name="description" content="jaxen bio - designer, producer">
     <link rel="stylesheet" href="css/main.css" />
     <link rel="shortcut icon" href="img/ecstasy-addiction-tablets.svg" type="image/ico">
     <script>
-        const phrases = ["mate producer", "acrylic designer"];
-        const transitionChars = "~!@#$%^&*()_+-=[]{};:,.<>?/|\\";
-        let currentIndex = 0;
-        let lastUpdate = Date.now();
-        let animFrame;
-        const showTime = 3000;
-        const transitionTime = 1000;
+        const titleText = "i've lost my mind ";
+        let index = 0;
 
-        function getRandomChar() {
-            return transitionChars[Math.floor(Math.random() * transitionChars.length)];
-        }
-
-        function transformText(baseText, targetText, progress) {
-            let result = "";
-            const maxLength = Math.max(baseText.length, targetText.length);
-            
-            for (let i = 0; i < maxLength; i++) {
-                if (Math.random() < progress) {
-                    result += i < targetText.length ? targetText[i] : "";
-                } else if (Math.random() < 0.4) {
-                    result += getRandomChar();
-                } else {
-                  result += i < baseText.length ? baseText[i] : "";
-                }
-            }
-            
-            return result || " ";
-        }
-
-        function updateTitle() {
-            const now = Date.now();
-            const elapsed = now - lastUpdate;
-            
-            if (elapsed < showTime) {
-                document.title = phrases[currentIndex];
-            } 
-            else if (elapsed < showTime + transitionTime) {
-                const nextIndex = (currentIndex + 1) % phrases.length;
-                 const progress = (elapsed - showTime) / transitionTime;
-               document.title = transformText(phrases[currentIndex], phrases[nextIndex], progress);
-            } 
-            else {
-                currentIndex = (currentIndex + 1) % phrases.length;
-                lastUpdate = now; 
-            }
-            
-            animFrame = setTimeout(updateTitle, 50);
+        function rotateTitle() {
+            const displayedText = titleText.slice(index) + titleText.slice(0, index);
+            document.title = displayedText;
+            index = (index + 1) % titleText.length;
         }
 
         window.addEventListener('load', () => {
-            updateTitle();
+            document.title = titleText.trim();
+            setInterval(rotateTitle, 250);
         });
     </script>
+
 </head>
 <body>
     <script src="js/promise-polyfill.js"></script>

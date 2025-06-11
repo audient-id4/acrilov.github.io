@@ -4,12 +4,12 @@ let config = {
 
   showDelay: 1.5, 
 
-  title: 'acrylic',
+  title: 'jaxen',
 
   social: {
-    telegram_kroysi: '@mate_beats',
-    soundcloud_kroysi: 'mate1mate',
-    instagram_kroysi: 'prod_mate_'
+    telegram_kroysi: '@prodjaxen',
+    soundcloud_kroysi: 'prodjaxen',
+    instagram_kroysi: 'prodbyjaxen'
   }, 
 
   preloaderColor: '#9789ff',
@@ -21,22 +21,12 @@ let config = {
   titleShadowColor: 'rgba(255, 255, 255, 0.5)',
 
   copyrightText: [
-    'get inspired',
-    'tryna drop a beat? we\'ll see',
-    'beatmaking boss',
-    'stay low, mate hears',
-    'ur beat is wack, mate said so',
-    'born to make bangers',
-    'daw crashed, u\'re done',
-    '100% groove, 0% filler',
-    'try harder, sound fatter',
-    'prod by mate, played by all',
-    'sample me? have fun',
-    '404: rhythm not found',
-    'mate > you',
-    'this ain\'t garageband, it slaps',
-    'remixed, outdone, fire',
-    'get that 808 pumping'
+    'blood on my soul',
+    'lost in the static',
+    'no love, no light',
+    'pills & empty dreams',
+    'cry in the abyss',
+    'born to die locked'
   ],
   copyrightTextColor: '#9789ff',
 
