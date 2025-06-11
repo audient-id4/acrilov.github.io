@@ -83,6 +83,11 @@ function init() {
             let username = data.trim();
             return `https://www.instagram.com/prod_mate_`;
           },
+
+          twitch_kroysi(data) {
+            let username = data.trim();
+            return `https://twitch.tv/acrilov`;
+          },
         }
       },
 

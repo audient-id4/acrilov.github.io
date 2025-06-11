@@ -97,6 +97,9 @@
   content: '\f16d';
 }
 
+.icon-twitch_kroysi:before {
+  content: '\f1e8';
+}
 
 /* '' */
 html {
