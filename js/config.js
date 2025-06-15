@@ -8,8 +8,8 @@ let config = {
 
   social: {
     telegram: '@prodjaxen',
-    soundcloud: 'mate1mate',
-    instagram: 'prodbyjaxen',
+    soundcloud: 'prodjaxen',
+    instagram: 'prodjaxen',
     twitch: 'acrilov'
   }, 
 
