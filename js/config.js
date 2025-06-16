@@ -7,11 +7,13 @@ let config = {
   title: 'jaxen',
 
   social: {
-    telegram: '@prodjaxen',
+    telegram: 'prodjaxen',
+    // vk: 'acrilov',
+    // steam: 'acrilov',
     soundcloud: 'prodjaxen',
     instagram: 'prodjaxen',
     twitch: 'acrilov'
-  }, 
+  },
 
   preloaderColor: '#9789ff',
 

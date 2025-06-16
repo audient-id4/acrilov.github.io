@@ -59,10 +59,19 @@ function init() {
         SOCIAL: {
           telegram(data) {
             let username = data.trim();
-            username = username.replace('@', '');
             return `https://t.me/` + username;
           },
-          
+    
+          vk(data) {
+            let username = data.trim();
+            return `https://vk.com/` + username;
+          },
+
+          steam(data) {
+            let username = data.trim();
+            return `https://steamcommunity.com/id/` + username;
+          },
+
           soundcloud(data) {
             let username = data.trim();
             return `https://soundcloud.com/` + username;
@@ -75,7 +84,7 @@ function init() {
 
           twitch(data) {
             let username = data.trim();
-            return `https://twitch.tv/` + username;
+            return `https://www.twitch.tv/` + username;
           },
         }
       },
