@@ -403,8 +403,14 @@ body, html {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  transition: none;
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
   filter: none;
+  margin: 0 0px;
+}
+
+.asif-page-info-social-item:hover,
+.asif-page-info-social-item:focus {
+  transform: translateY(-8px);
 }
 
 .asif-page-info-social-item .icon-telegram:before,
@@ -413,7 +419,7 @@ body, html {
 .asif-page-info-social-item .icon-soundcloud:before,
 .asif-page-info-social-item .icon-instagram:before,
 .asif-page-info-social-item .icon-twitch:before {
-  font-size: 2.6rem;
+  font-size: 3.1rem;
   color: #9789ff;
   background: none;
   border-radius: 0;
@@ -435,7 +441,7 @@ body, html {
   box-shadow: 0 4px 24px 0 rgba(151,137,255,0.25);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.22s cubic-bezier(0.4,0,0.2,1);
   z-index: 3000;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -450,6 +456,7 @@ body, html {
 .asif-page-info-social-item:focus .social-tooltip {
   opacity: 1;
   pointer-events: auto;
+  transform: translateX(-50%) translateY(-8px);
 }
 @media screen and (max-width: 600px) {
   .social-tooltip {
