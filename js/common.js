@@ -146,6 +146,10 @@ function init() {
               changeCopyright();
             }, 5000);
           }, config.showDelay * 1000);
+
+          if (typeof hideDim === 'function') hideDim();
+
+          if (window.startOneko) window.startOneko();
         },
     
         getSocialLink(type, username) {

@@ -11,19 +11,16 @@
     <script>
         const titleText = "i've lost my mind ";
         let index = 0;
-
         function rotateTitle() {
             const displayedText = titleText.slice(index) + titleText.slice(0, index);
             document.title = displayedText;
             index = (index + 1) % titleText.length;
         }
-
         window.addEventListener('load', () => {
             document.title = titleText.trim();
             setInterval(rotateTitle, 250);
         });
     </script>
-
 </head>
 <body>
     <script src="js/promise-polyfill.js"></script>
@@ -34,14 +31,11 @@
           window.location.href = "/videos/Righthere.mp4";
         }
       });
-
       devtoolsDetector.launch();
     </script>
-    
     <div class="preloader">
         <div class="preloader-circle PreloaderStyle"></div>
     </div>
-
     <div id="asif-page">    
         <div class="wrapper">
             <div class="background">
@@ -77,14 +71,21 @@
                         <div
                             class="asif-page-info-social"
                             :class="{ 'social-visible': titleVisible }"
+                            v-show="titleVisible"
                         >
                             <a
-                                v-for="(item, key) in social"
-                                :href="getSocialLink(key, item)"
-                                target="_blank"
-                                class="asif-page-info-social-item"
+                              v-for="(item, key) in social"
+                              :href="getSocialLink(key, item)"
+                              target="_blank"
+                              class="asif-page-info-social-item"
+                              @mouseenter="handleTooltipPosition($event)"
+                              @focus="handleTooltipPosition($event)"
                             >
-                                <span :style="SocialStyle" :class="'icon-' + key"></span>
+                              <span :style="SocialStyle" :class="'icon-' + key"></span>
+                              <span class="social-tooltip">
+                                <span class="tooltip-label">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</span>
+                                <span class="tooltip-username">{{ item }}</span>
+                              </span>
                             </a>
                         </div>
                     </div>
@@ -92,9 +93,62 @@
             </div>
         </div>
     </div>
-
+    <div id="background-dim" class="background-dim"></div>
     <script src="js/vue.js"></script>
     <script src="js/config.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/oneko.js"></script>
+    <script>
+      function showDim() {
+        const dim = document.getElementById('background-dim');
+        if (dim) {
+          dim.classList.remove('hide');
+          dim.style.display = 'block';
+        }
+      }
+      function hideDim() {
+        const dim = document.getElementById('background-dim');
+        if (dim) {
+          dim.classList.add('hide');
+          setTimeout(() => {
+            dim.style.display = 'none';
+            dim.classList.remove('hide');
+          }, 700);
+        }
+      }
+      showDim();
+      function handleTooltipPosition(event) {
+        const tooltip = event.currentTarget.querySelector('.social-tooltip');
+        if (!tooltip) return;
+        tooltip.style.top = '';
+        tooltip.style.bottom = '';
+        tooltip.style.left = '50%';
+        tooltip.style.right = '';
+        tooltip.style.transform = 'translateX(-50%)';
+        const prevDisplay = tooltip.style.display;
+        tooltip.style.visibility = 'hidden';
+        tooltip.style.opacity = '0';
+        tooltip.style.display = 'block';
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const iconRect = event.currentTarget.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - iconRect.bottom;
+        const spaceAbove = iconRect.top;
+        const offset = 18;
+        if (window.innerWidth > 600 && spaceBelow > tooltipRect.height + offset) {
+          tooltip.style.top = `calc(100% + ${offset}px)`;
+          tooltip.style.bottom = '';
+        } else if (spaceAbove > tooltipRect.height + offset) {
+          tooltip.style.top = '';
+          tooltip.style.bottom = `calc(100% + ${offset}px)`;
+        } else {
+          tooltip.style.top = `calc(100% + ${offset}px)`;
+          tooltip.style.bottom = '';
+        }
+        tooltip.style.visibility = '';
+        tooltip.style.opacity = '';
+        tooltip.style.display = prevDisplay;
+      }
+      window.handleTooltipPosition = handleTooltipPosition;
+    </script>
 </body>
 </html>
