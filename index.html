@@ -26,12 +26,15 @@
     <script src="js/promise-polyfill.js"></script>
     <script src="js/devtools-detector.js"></script>
     <script>
-      devtoolsDetector.addListener(function (isOpen) {
-        if (isOpen) {
-          window.location.href = "/videos/Righthere.mp4";
-        }
-      });
-      devtoolsDetector.launch();
+      setTimeout(function() {
+        devtoolsDetector.addListener(function (isOpen) {
+          console.log('devtoolsDetector isOpen:', isOpen);
+          if (isOpen === true) {
+            window.location.href = "/videos/Righthere.mp4";
+          }
+        });
+        devtoolsDetector.launch();
+      }, 1000); 
     </script>
     <div class="preloader">
         <div class="preloader-circle PreloaderStyle"></div>
