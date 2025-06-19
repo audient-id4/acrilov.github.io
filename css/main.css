@@ -396,36 +396,72 @@ body, html {
   display: flex;
   gap: 32px;
   justify-content: center;
+  align-items: center;
   margin-top: 18px;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition-property: transform, opacity, visibility;
+  transition-property: transform, opacity, visibility;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+}
+
+.asif-page-info-social.social-visible {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }
 
 .asif-page-info-social-item {
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
   filter: none;
-  margin: 0 0px;
+  margin: 0 2px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
-.asif-page-info-social-item:hover,
-.asif-page-info-social-item:focus {
-  transform: translateY(-8px);
+@media screen and (min-width: 601px) {
+  .asif-page-info-social {
+    gap: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .asif-page-info-social-item .icon-telegram:before,
+  .asif-page-info-social-item .icon-vk:before,
+  .asif-page-info-social-item .icon-steam:before,
+  .asif-page-info-social-item .icon-soundcloud:before,
+  .asif-page-info-social-item .icon-instagram:before,
+  .asif-page-info-social-item .icon-twitch:before {
+    font-size: 2.5rem;
+  }
 }
 
-.asif-page-info-social-item .icon-telegram:before,
-.asif-page-info-social-item .icon-vk:before,
-.asif-page-info-social-item .icon-steam:before,
-.asif-page-info-social-item .icon-soundcloud:before,
-.asif-page-info-social-item .icon-instagram:before,
-.asif-page-info-social-item .icon-twitch:before {
-  font-size: 3.1rem;
-  color: #9789ff;
-  background: none;
-  border-radius: 0;
-  padding: 0;
-  box-shadow: none;
-  transition: none;
+.social-tooltip {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  max-width: 90vw;
+  min-width: 70px;
+  word-break: break-word;
+  white-space: normal;
+  text-align: center;
+  padding: 7px 14px;
 }
 
 .social-tooltip {
@@ -456,15 +492,19 @@ body, html {
 .asif-page-info-social-item:focus .social-tooltip {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(-8px);
+  transform: translateX(-50%) translateY(-12px) scale(1.04);
 }
 @media screen and (max-width: 600px) {
   .social-tooltip {
-    font-size: 0.98em;
-    padding: 6px 12px;
-    min-width: 90px;
-    max-width: 180px;
+    font-size: 0.92em;
+    padding: 5px 8px;
+    min-width: 70px;
+    max-width: 90vw;
+    word-break: break-word;
     white-space: normal;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
   }
 }
 .social-tooltip .tooltip-label {
@@ -564,6 +604,81 @@ body, html {
   pointer-events: none !important;
   top: 0;
   left: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .asif-page-info-social {
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .asif-page-info-social-item {
+    font-size: 1.3rem;
+    margin: 0 2px;
+  }
+  .asif-page-info-social-item .icon-telegram:before,
+  .asif-page-info-social-item .icon-vk:before,
+  .asif-page-info-social-item .icon-steam:before,
+  .asif-page-info-social-item .icon-soundcloud:before,
+  .asif-page-info-social-item .icon-instagram:before,
+  .asif-page-info-social-item .icon-twitch:before {
+    font-size: 2.1rem;
+  }
+  .social-tooltip {
+    font-size: 0.92em;
+    padding: 5px 8px;
+    min-width: 70px;
+    max-width: 90vw;
+    word-break: break-word;
+    white-space: normal;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+.social-tooltip {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 90vw;
+}
+
+.asif-page-info-social-item {
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.asif-page-info-social-item:hover,
+.asif-page-info-social-item:focus {
+  transform: translateY(-8px);
+}
+
+.social-fade-enter-active, .social-fade-leave-active {
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.social-fade-enter-from, .social-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.social-fade-enter-to, .social-fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+.asif-page-info-social-inner {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+.asif-page-info-social-item .icon-telegram:before,
+.asif-page-info-social-item .icon-vk:before,
+.asif-page-info-social-item .icon-steam:before,
+.asif-page-info-social-item .icon-soundcloud:before,
+.asif-page-info-social-item .icon-instagram:before,
+.asif-page-info-social-item .icon-twitch:before {
+  font-size: 3.2rem;
 }
 
 /*# sourceMappingURL=main.css.map */

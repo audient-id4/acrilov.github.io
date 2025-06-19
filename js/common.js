@@ -104,7 +104,10 @@ function init() {
           this.isPlaying = true;
         
           setTimeout(() => {
-            this.titleVisible = true;
+            this.titleVisible = false;
+            void this.$nextTick(() => {
+              this.titleVisible = true;
+            });
             awesomeEffect({
               el: title,
               text: this.title,

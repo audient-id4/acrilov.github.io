@@ -71,22 +71,24 @@
                         <div
                             class="asif-page-info-social"
                             :class="{ 'social-visible': titleVisible }"
-                            v-show="titleVisible"
                         >
-                            <a
-                              v-for="(item, key) in social"
-                              :href="getSocialLink(key, item)"
-                              target="_blank"
-                              class="asif-page-info-social-item"
-                              @mouseenter="handleTooltipPosition($event)"
-                              @focus="handleTooltipPosition($event)"
-                            >
-                              <span :style="SocialStyle" :class="'icon-' + key"></span>
-                              <span class="social-tooltip">
-                                <span class="tooltip-label">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</span>
-                                <span class="tooltip-username">{{ item }}</span>
-                              </span>
-                            </a>
+                            <transition-group name="social-fade" tag="div" class="asif-page-info-social-inner">
+                              <a
+                                v-for="(item, key) in social"
+                                :key="key"
+                                :href="getSocialLink(key, item)"
+                                target="_blank"
+                                class="asif-page-info-social-item"
+                                @mouseenter="handleTooltipPosition($event)"
+                                @focus="handleTooltipPosition($event)"
+                              >
+                                <span :style="SocialStyle" :class="'icon-' + key"></span>
+                                <span class="social-tooltip">
+                                  <span class="tooltip-label">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</span>
+                                  <span class="tooltip-username">{{ item }}</span>
+                                </span>
+                              </a>
+                            </transition-group>
                         </div>
                     </div>
                 </div>
@@ -134,6 +136,11 @@
         const spaceBelow = window.innerHeight - iconRect.bottom;
         const spaceAbove = iconRect.top;
         const offset = 18;
+        let left = iconRect.left + iconRect.width / 2 - tooltipRect.width / 2;
+        if (left < 4) left = 4;
+        if (left + tooltipRect.width > window.innerWidth - 4) left = window.innerWidth - tooltipRect.width - 4;
+        tooltip.style.left = left + 'px';
+        tooltip.style.transform = 'none';
         if (window.innerWidth > 600 && spaceBelow > tooltipRect.height + offset) {
           tooltip.style.top = `calc(100% + ${offset}px)`;
           tooltip.style.bottom = '';
