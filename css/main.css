@@ -266,7 +266,7 @@ body, html {
   width: 60px;
   height: 60px;
   border: 6px solid transparent;
-  border-top: 6px solid #be32f5;
+  border-top: 6px solid #ffffff7a;
   border-radius: 100%;
   -webkit-animation: preloader 500ms linear infinite;
           animation: preloader 500ms linear infinite;
@@ -296,7 +296,7 @@ body, html {
 .asif-page-copyright {
   top: 0px;
   left: 0px;
-  color: #a51eff;
+  color: #ffffff;
   font-size: 1rem;
   font-family: "VT323";
   z-index: -99;
@@ -323,7 +323,7 @@ body, html {
   font-family: 'VT323';
   font-size: 10rem;
   cursor: pointer;
-  color: #921eff;
+  color: #ffffff70;
   text-align: center;
   height: 100px;
   -webkit-animation: play linear alternate 1s infinite;
@@ -359,31 +359,23 @@ body, html {
   height: 0px;
 }
 
+/* Поднять title чуть выше */
 .asif-page-info-title {
   font-family: "VT323";
   text-align: center;
   font-size: 10rem;
-  color: #801eff;
-  text-shadow: 3px 3px 0 rgba(212, 0, 255, 0.6);
+  color: #ffffff;
+  text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.6);
   -webkit-transform: scale(0);
           transform: scale(0);
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 300ms;
   transition: 300ms;
+  margin-top: -40px;
 }
 
-@media screen and (max-width: 768px) {
-  .asif-page-info-title {
-    font-size: 5rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .asif-page-info-title {
-    font-size: 4rem;
-  }
-}
+/* Оставить размер title одинаковым на всех экранах */
 
 .asif-page-info-title.title-visible {
   -webkit-transform: scale(1);
@@ -392,12 +384,13 @@ body, html {
   opacity: 1;
 }
 
+/* Поднять social чуть выше */
 .asif-page-info-social {
   display: flex;
   gap: 32px;
   justify-content: center;
   align-items: center;
-  margin-top: 18px;
+  margin-top: 0px;
   flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
@@ -442,14 +435,16 @@ body, html {
     margin-left: auto;
     margin-right: auto;
   }
-  .asif-page-info-social-item .icon-telegram:before,
-  .asif-page-info-social-item .icon-vk:before,
-  .asif-page-info-social-item .icon-steam:before,
-  .asif-page-info-social-item .icon-soundcloud:before,
-  .asif-page-info-social-item .icon-instagram:before,
-  .asif-page-info-social-item .icon-twitch:before {
-    font-size: 2.5rem;
-  }
+}
+
+/* Фиксированный размер иконок соцсетей на всех экранах */
+.asif-page-info-social-item .icon-telegram:before,
+.asif-page-info-social-item .icon-vk:before,
+.asif-page-info-social-item .icon-steam:before,
+.asif-page-info-social-item .icon-soundcloud:before,
+.asif-page-info-social-item .icon-instagram:before,
+.asif-page-info-social-item .icon-twitch:before {
+  font-size: 3.2rem;
 }
 
 .social-tooltip {
@@ -468,13 +463,13 @@ body, html {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(151,137,255,0.97);
+  background: rgba(255, 255, 255, 0.5);
   color: #fff;
   font-family: 'VT323', monospace;
   font-size: 1.08em;
   padding: 7px 18px;
   border-radius: 12px;
-  box-shadow: 0 4px 24px 0 rgba(151,137,255,0.25);
+  box-shadow: 0 4px 24px 0 rgba(255, 255, 255, 0.25);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.22s cubic-bezier(0.4,0,0.2,1);
@@ -513,13 +508,13 @@ body, html {
   color: #fff;
   letter-spacing: 0.06em;
   margin-bottom: 2px;
-  text-shadow: 0 2px 8px #9789ff44;
+  text-shadow: 0 2px 8px #ffffff44;
 }
 .social-tooltip .tooltip-username {
   font-size: 0.98em;
-  color: #e0dbff;
+  color: rgba(255, 255, 255, 0.473);
   font-family: inherit;
-  text-shadow: 0 1px 4px #9789ff33;
+  text-shadow: 0 1px 4px #ffffff33;
 }
 
 .asif-page-info-new {
@@ -539,7 +534,7 @@ body, html {
   padding: 6px 12px;
   font-family: "VT323";
   font-size: 1.2rem;
-  background-color: #ad1eff;
+  background-color: #ffffff;
   color: #ffffff;
   text-decoration: none;
   border-radius: 3px;
@@ -615,14 +610,15 @@ body, html {
     font-size: 1.3rem;
     margin: 0 2px;
   }
-  .asif-page-info-social-item .icon-telegram:before,
+  /* Оставить размер иконок соцсетей одинаковым */
+  /* .asif-page-info-social-item .icon-telegram:before,
   .asif-page-info-social-item .icon-vk:before,
   .asif-page-info-social-item .icon-steam:before,
   .asif-page-info-social-item .icon-soundcloud:before,
   .asif-page-info-social-item .icon-instagram:before,
   .asif-page-info-social-item .icon-twitch:before {
     font-size: 2.1rem;
-  }
+  } */
   .social-tooltip {
     font-size: 0.92em;
     padding: 5px 8px;

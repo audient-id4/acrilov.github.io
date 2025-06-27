@@ -2,7 +2,7 @@ let config = {
 
   preloaderDelay: 1,
 
-  showDelay: 1.5, 
+  showDelay: 0.65, 
 
   title: 'jaxen',
 
@@ -15,12 +15,12 @@ let config = {
     twitch: 'acrilov'
   },
 
-  preloaderColor: '#9789ff',
+  preloaderColor: 'rgba(255, 255, 255, 0.2)',
 
-  playButtonColor: '#9789ff',
+  playButtonColor: 'rgba(255, 255, 255, 0.2)',
   playButtonShadowColor: 'rgba(255, 255, 255, 0.5)',
 
-  titleColor: '#9789ff',
+  titleColor: 'rgba(255, 255, 255, 0.2)',
   titleShadowColor: 'rgba(255, 255, 255, 0.5)',
 
   copyrightText: [
@@ -45,8 +45,8 @@ let config = {
     'dissolve into patterns',
     'see the sound waves'
   ],
-  copyrightTextColor: '#9789ff',
+  copyrightTextColor: 'rgba(255, 255, 255, 0.2)',
 
-  socialColor: '#9789ff',
+  socialColor: 'rgba(255, 255, 255, 0.2)',
   socialShadowColor: 'rgba(255, 255, 255, 0.5)',
 }
