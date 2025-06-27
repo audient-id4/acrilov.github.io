@@ -94,6 +94,7 @@ html {
   font-size: 18px;
   color: #000000;
   height: 100%;
+  background: #000;
 }
 
 @media screen and (max-width: 1280px) {
@@ -129,6 +130,29 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #000;
+}
+
+
+/* Эффект "исключение" только для текста, тултипов, копирайта и социалок с выделением и прозрачностью */
+.asif-page-info-title,
+.asif-page-info-play,
+.asif-page-copyright,
+.asif-page-info-social,
+.asif-page-info-social-item,
+.asif-page-info-social-item .icon-telegram:before,
+.asif-page-info-social-item .icon-vk:before,
+.asif-page-info-social-item .icon-steam:before,
+.asif-page-info-social-item .icon-soundcloud:before,
+.asif-page-info-social-item .icon-instagram:before,
+.asif-page-info-social-item .icon-twitch:before,
+.social-tooltip,
+.social-tooltip .tooltip-label,
+.social-tooltip .tooltip-username {
+  mix-blend-mode: exclusion !important;
+  color: rgba(255,255,255,0.75) !important;
+  text-shadow: 0 0 8px rgba(255,255,255,0.25), 0 0 24px rgba(255,255,255,0.18);
+  /* прозрачность и свечение для выделения */
 }
 
 .wrapper {
@@ -443,58 +467,49 @@ body, html {
 }
 
 .social-tooltip {
+  position: absolute;
   left: 50% !important;
   right: auto !important;
-  transform: translateX(-50%) !important;
-  max-width: 90vw;
-  min-width: 70px;
-  word-break: break-word;
-  white-space: normal;
-  text-align: center;
-  padding: 7px 14px;
-}
-
-.social-tooltip {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.5);
+  top: 100%;
+  transform: translateX(-50%) translateY(8px) !important;
   color: #fff;
   font-family: 'VT323', monospace;
-  font-size: 1.08em;
-  padding: 7px 18px;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px 0 rgba(255, 255, 255, 0.25);
+  font-size: 1.13em;
+  padding: 7px 18px 8px 18px;
+  border-radius: 11px;
+  box-shadow: none;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.22s cubic-bezier(0.4,0,0.2,1);
   z-index: 3000;
   letter-spacing: 0.04em;
-  white-space: nowrap;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
-  max-width: 90vw;
+  margin: 0 auto;
+  display: inline-block;
+  min-width: 90px;
+  max-width: 210px;
+  width: auto;
+  border: none;
+  text-shadow: none;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.45;
 }
 .asif-page-info-social-item:hover .social-tooltip,
 .asif-page-info-social-item:focus .social-tooltip {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(-12px) scale(1.04);
+  transform: translateX(-50%) translateY(-4px) scale(1.04);
 }
 @media screen and (max-width: 600px) {
   .social-tooltip {
-    font-size: 0.92em;
-    padding: 5px 8px;
+    font-size: 1em;
+    padding: 6px 10px 7px 10px;
     min-width: 70px;
     max-width: 90vw;
-    word-break: break-word;
-    white-space: normal;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
+    border-radius: 10px;
   }
 }
 .social-tooltip .tooltip-label {
@@ -502,14 +517,20 @@ body, html {
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.06em;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
   text-shadow: 0 2px 8px #ffffff44;
+  white-space: nowrap;
+  display: block;
 }
 .social-tooltip .tooltip-username {
-  font-size: 0.98em;
-  color: rgba(255, 255, 255, 0.473);
+  font-size: 0.92em;
+  color: rgba(255, 255, 255, 0.7);
   font-family: inherit;
   text-shadow: 0 1px 4px #ffffff33;
+  white-space: nowrap;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .asif-page-info-new {
