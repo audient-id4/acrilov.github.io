@@ -359,7 +359,6 @@ body, html {
   height: 0px;
 }
 
-/* Поднять title чуть выше */
 .asif-page-info-title {
   font-family: "VT323";
   text-align: center;
@@ -375,8 +374,6 @@ body, html {
   margin-top: -40px;
 }
 
-/* Оставить размер title одинаковым на всех экранах */
-
 .asif-page-info-title.title-visible {
   -webkit-transform: scale(1);
           transform: scale(1);
@@ -384,7 +381,6 @@ body, html {
   opacity: 1;
 }
 
-/* Поднять social чуть выше */
 .asif-page-info-social {
   display: flex;
   gap: 32px;
@@ -437,7 +433,6 @@ body, html {
   }
 }
 
-/* Фиксированный размер иконок соцсетей на всех экранах */
 .asif-page-info-social-item .icon-telegram:before,
 .asif-page-info-social-item .icon-vk:before,
 .asif-page-info-social-item .icon-steam:before,
@@ -610,7 +605,6 @@ body, html {
     font-size: 1.3rem;
     margin: 0 2px;
   }
-  /* Оставить размер иконок соцсетей одинаковым */
   /* .asif-page-info-social-item .icon-telegram:before,
   .asif-page-info-social-item .icon-vk:before,
   .asif-page-info-social-item .icon-steam:before,

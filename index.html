@@ -159,6 +159,27 @@
         tooltip.style.display = prevDisplay;
       }
       window.handleTooltipPosition = handleTooltipPosition;
+      (function() {
+        const initialWidth = window.outerWidth;
+        const initialHeight = window.outerHeight;
+        let isRestoring = false;
+        window.addEventListener('resize', function() {
+          if (isRestoring) return;
+          isRestoring = true;
+          window.resizeTo(initialWidth, initialHeight);
+          setTimeout(() => { isRestoring = false; }, 500);
+        });
+        window.addEventListener('wheel', function(e) {
+          if (e.ctrlKey) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+        window.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0' || e.key === 'NumPadAdd' || e.key === 'NumPadSubtract')) {
+            e.preventDefault();
+          }
+        });
+      })();
     </script>
 </body>
 </html>
