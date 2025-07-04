@@ -4,14 +4,14 @@ let config = {
 
   showDelay: 0.65, 
 
-  title: 'jaxen',
+  title: 'mate',
 
   social: {
-    telegram: 'prodjaxen',
+    telegram: 'prod_mate',
     // vk: 'acrilov',
     // steam: 'acrilov',
-    soundcloud: 'prodjaxen',
-    instagram: 'prodjaxen',
+    soundcloud: 'prod_mate',
+    instagram: 'prodmate',
     twitch: 'acrilov'
   },
 

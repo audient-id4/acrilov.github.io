@@ -134,7 +134,6 @@ body {
 }
 
 
-/* Эффект "исключение" только для текста, тултипов, копирайта и социалок с выделением и прозрачностью */
 .asif-page-info-title,
 .asif-page-info-play,
 .asif-page-copyright,
@@ -152,7 +151,6 @@ body {
   mix-blend-mode: exclusion !important;
   color: rgba(255,255,255,0.75) !important;
   text-shadow: 0 0 8px rgba(255,255,255,0.25), 0 0 24px rgba(255,255,255,0.18);
-  /* прозрачность и свечение для выделения */
 }
 
 .wrapper {
@@ -336,7 +334,8 @@ body, html {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 90vh;
+  height: -80vh;
+  margin-top: -2vh;
 }
 
 .asif-page-info {
