@@ -4,14 +4,14 @@ let config = {
 
   showDelay: 0.65, 
 
-  title: 'mate',
+  title: 'vime',
 
   social: {
-    telegram: 'prod_mate',
+    telegram: 'prodvime',
     // vk: 'acrilov',
     // steam: 'acrilov',
-    soundcloud: 'prod_mate',
-    instagram: 'prodmate',
+    soundcloud: 'prodvime',
+    instagram: 'prodvime',
     twitch: 'acrilov'
   },
 
