@@ -2,7 +2,7 @@ let config = {
 
   preloaderDelay: 1,
 
-  showDelay: 0.65, 
+  showDelay: 0, 
 
   title: 'vime',
 
